@@ -1,18 +1,14 @@
 public class Test {
     public static void main(String[] args) {
-        int[] arr = { 10, 9, 8, 7, 5, 4, 3, 2, 1, 0 };
-        int target = 6;
-        System.out.println(search(arr, target));
+        int[] arr = { 2, 3, 5, 9, 14, 16, 18 };
+        System.out.println(search(arr, 1));
     }
 
     static int search(int[] arr, int target) {
         int start = 0;
         int end = arr.length - 1;
-        int flag = 0;
 
-        // For descending order
-        if (arr[0] > arr[arr.length - 1]) {
-            flag = 1;
+        if (arr[start] > arr[end]) {
             int[] arr2 = new int[arr.length];
             int[] temp = new int[arr.length];
             for (int i = 0; i < arr.length; i++) {
@@ -22,21 +18,18 @@ public class Test {
             arr2 = arr;
             arr = temp;
         }
-
         int mid = start + (end - start) / 2;
-        while (start <= end) { // Why <= is required and not just < ?
-            mid = start + (end - start) / 2;
-            if (target < arr[mid]) {
-                end = mid - 1;
-            } else if (target > arr[mid]) {
-                start = mid + 1;
+        while (start <= end) {
+            if (arr[mid] <= target) {
+                if (arr[mid] == target) {
+                    return arr[mid];
+                } else
+                    start = mid + 1;
             } else {
-                if (flag == 1) {
-                    return arr.length - 1 - mid;
-                }
-                return mid;
+                end = mid - 1;
             }
+            mid = start + (end - start) / 2;
         }
-        return -1;
+        return -1; // The last elemet of the array was greater than the target :D
     }
 }
