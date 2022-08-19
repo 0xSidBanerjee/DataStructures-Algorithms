@@ -1,4 +1,4 @@
-public class Test {
+public class Leetcode35 {
     public static void main(String[] args) {
         int[] nums = { 2, 3, 5, 9, 14, 16, 18 };
         System.out.println(search(nums, 1));
